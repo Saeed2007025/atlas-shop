@@ -1,0 +1,47 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1. Fake 404 for any attempts to access /admin or /admin/ (Conceals secret panel path!)
+RewriteRule ^admin(/.*)?$ - [R=404,L]
+
+# 2. Permanent 301 Redirect /index.php to root /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/ [NC]
+RewriteRule ^index\.php$ / [R=301,L]
+
+# 3. Explicit Extensionless Page Routing
+RewriteRule ^login/?$ login.php [L]
+RewriteRule ^shop/?$ shop.php [L]
+RewriteRule ^product/?$ product.php [L]
+RewriteRule ^cart/?$ cart.php [L]
+RewriteRule ^checkout/?$ checkout.php [L]
+RewriteRule ^orders/?$ orders.php [L]
+RewriteRule ^categories/?$ categories.php [L]
+RewriteRule ^blog/?$ blog.php [L]
+RewriteRule ^post/?$ post.php [L]
+RewriteRule ^about/?$ about.php [L]
+RewriteRule ^contact/?$ contact.php [L]
+RewriteRule ^returns/?$ returns.php [L]
+RewriteRule ^faq/?$ faq.php [L]
+RewriteRule ^success/?$ success.php [L]
+RewriteRule ^failed/?$ failed.php [L]
+
+# 4. Handle /panel-adminweb extensionless URLs cleanly
+RewriteRule ^panel-adminweb/?$ panel-adminweb/index.php [L]
+RewriteRule ^panel-adminweb/login/?$ panel-adminweb/login.php [L]
+RewriteRule ^panel-adminweb/([a-zA-Z0-9_-]+)/?$ panel-adminweb/$1.php [L]
+
+# Prevent directory indexing
+Options -Indexes
+
+# Protect sensitive backend directories
+RewriteRule ^(inc|data)/ - [F,L]
+
+</IfModule>
+
+# Security HTTP Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

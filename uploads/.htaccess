@@ -1,0 +1,17 @@
+# Deny direct access to PHP files in uploads
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|phar|cgi|pl|py|sh|bash)$">
+    Require all denied
+</FilesMatch>
+
+# Disable PHP engine
+php_flag engine off
+
+# Force download for non-image files
+<FilesMatch "(?<!\.(jpg|jpeg|png|gif|webp|svg|ico|pdf))$">
+    Header set Content-Disposition attachment
+</FilesMatch>
+
+# Deny access to hidden files
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,32 @@
+# Environment & Config
+.env
+*.env
+inc/config.local.php
+
+# Database files
+data/*.sqlite
+data/install.lock
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Logs
+*.log
+error_log
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Uploads (keep directory structure but not user uploads)
+uploads/*
+!uploads/.htaccess
+!uploads/index.html

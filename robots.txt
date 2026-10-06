@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /panel-adminweb/
+Disallow: /api/
+Disallow: /inc/
+Disallow: /data/
+Disallow: /install
+
+Sitemap: https://atlashop.ir/sitemap.php
